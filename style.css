@@ -1,8 +1,52 @@
-
 #mouse-controls {
-    margin-left: 20px;
-    display: grid; 
-    grid-template-columns: auto auto; 
-    gap: 5px;
-    align-self: flex-start;
+  margin-left: 30px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(60px, 1fr));
+  gap: 8px 20px;
+  align-self: flex-start;
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 14px;
+}
+
+#mouse-controls label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  user-select: none;
+  padding: 3px 6px;
+  border-radius: 5px;
+  transition: background-color 0.2s ease;
+}
+
+#mouse-controls label:hover {
+  background-color: #f0f0f0;
+}
+
+#mouse-controls input[type="checkbox"] {
+  accent-color: #1e90ff; /* modern checkbox color */
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+#mouse-controls-container {
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 5px 20px;
+  margin-left: 30px;
+  align-self: flex-start;
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 14px;
+}
+
+#mouse-title {
+    grid-column: span 2; 
+    font-weight: bold; 
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+#run-button{
+    margin-top: 20px;
 }
