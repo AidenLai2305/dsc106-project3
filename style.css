@@ -1,0 +1,8 @@
+
+#mouse-controls {
+    margin-left: 20px;
+    display: grid; 
+    grid-template-columns: auto auto; 
+    gap: 5px;
+    align-self: flex-start;
+}
