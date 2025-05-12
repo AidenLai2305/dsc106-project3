@@ -1,8 +1,9 @@
 import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7.9.0/+esm";
 
 const svg = d3.select("svg");
-const width = 1000;
-const height = 350;
+const width = window.innerWidth * 0.85; 
+const height = 300;
+
 const margin = { top: 20, right: 20, bottom: 30, left: 40 };
 
 svg.attr("width", width).attr("height", height);
