@@ -2,7 +2,8 @@ import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7.9.0/+esm";
 
 const svg = d3.select("svg");
 const width = window.innerWidth * 0.85; 
-const height = 500;
+// const height = 500;
+const height = window.innerWidth * 0.3; // adjust multiplier as needed
 
 const margin = { top: 50, right: 30, bottom: 50, left: 60 };
 
@@ -104,10 +105,11 @@ d3.select("#select-all").on("change", function () {
 });
 
 // Add axes
-const xAxis = d3
-  .axisBottom(xScale)
-  .ticks(14) // One tick per day
-  .tickFormat((d) => `Day ${Math.floor(d / (24 * 60)) + 1}`);
+const dayTicks = d3.range(0, 14).map(d => d * 24 * 60); // [0, 1440, 2880, ..., 18720]
+
+const xAxis = d3.axisBottom(xScale)
+  .tickValues(dayTicks)
+  .tickFormat(d => `Day ${d / (24 * 60) + 1}`);
 
 const yAxis = d3
   .axisLeft(yScale)
