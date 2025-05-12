@@ -93,6 +93,7 @@ const paths = svg.append("g")
   .attr("fill", "none")
   .attr("stroke", d => colorScale(d.id))
   .attr("stroke-width", 1.5)
+  .attr("opacity", 0.6)
   .attr("d", d => line(d.values))
   .attr("display", "none");
 
