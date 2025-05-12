@@ -194,3 +194,35 @@ document.getElementById("run-button").addEventListener("click", () => {
     i += 50; // speed
   });
 });
+
+mouseLines.forEach((lineData) => {
+  svg.selectAll(`.dot-${lineData.id}`)
+    .data(lineData.values)
+    .join("circle")
+    .attr("class", `dot-${lineData.id}`)
+    .attr("cx", d => xScale(d.time))
+    .attr("cy", d => yScale(d.temperature))
+    .attr("r", 5)
+    .attr("fill", colorScale(lineData.id))
+    .attr("opacity", 0) // invisible but interactive
+    .on("mouseover", function (event, d) {
+
+      console.log(`Hovered: Mouse ${lineData.id}, Temp ${d.temperature}, Minute ${d.time}`);
+
+      d3.select("#tooltip")
+        .style("display", "block")
+        .html(`
+          <strong>Mouse:</strong> ${lineData.id}<br/>
+          <strong>Temp:</strong> ${d.temperature.toFixed(1)} °C<br/>
+          <strong>Minute:</strong> ${d.time}
+        `);
+    })
+    .on("mousemove", function (event) {
+      d3.select("#tooltip")
+        .style("left", event.pageX + 10 + "px")
+        .style("top", event.pageY - 28 + "px");
+    })
+    .on("mouseout", function () {
+      d3.select("#tooltip").style("display", "none");
+    });
+});
