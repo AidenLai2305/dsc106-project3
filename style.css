@@ -1,10 +1,19 @@
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 100vh;
+  margin: 0;
+}
+
 #mouse-controls {
   margin-left: 30px;
   display: grid;
   grid-template-columns: repeat(2, minmax(60px, 1fr));
   gap: 8px 20px;
   align-self: flex-start;
-  font-family: 'Segoe UI', sans-serif;
+  font-family: "Segoe UI", sans-serif;
   font-size: 14px;
 }
 
@@ -36,17 +45,17 @@
   gap: 5px 20px;
   margin-left: 30px;
   align-self: flex-start;
-  font-family: 'Segoe UI', sans-serif;
+  font-family: "Segoe UI", sans-serif;
   font-size: 14px;
 }
 
 #mouse-title {
-    grid-column: span 2; 
-    font-weight: bold; 
-    margin-bottom: 5px;
-    text-align: center;
+  grid-column: span 2;
+  font-weight: bold;
+  margin-bottom: 5px;
+  text-align: center;
 }
 
-#run-button{
-    margin-top: 20px;
+#run-button {
+  margin-top: 20px;
 }
