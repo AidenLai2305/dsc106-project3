@@ -104,9 +104,19 @@ const xAxis = d3.axisBottom(xScale)
 
 const yAxis = d3.axisLeft(yScale).ticks(5).tickFormat(d3.format(".1f"));
 
+const highlightDays = [2, 6, 10, 14];
+const halfDay = 12 * 60; // 12 hours in minutes
+
 svg.append("g")
   .attr("transform", `translate(0,${height - margin.bottom})`)
-  .call(xAxis);
+  .call(xAxis)
+  .selectAll(".tick")
+  .filter(function(d) {
+    // Get only the start of each of the desired days
+    return highlightDays.includes((d / (24 * 60)) + 1);
+  })
+  .select("text")
+  .style("fill", "red");
 
 svg.append("g")
   .attr("transform", `translate(${margin.left},0)`)
