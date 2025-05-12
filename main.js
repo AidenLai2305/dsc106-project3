@@ -19,13 +19,7 @@ controls
   .data(mouseIDs)
   .join("label")
   .attr("style", "margin-right: 10px;")
-  .html((d) => `<input type="checkbox" value="${d}" checked> ${d}`);
-
-// Append "Select All" to fill the final column cell (beside f12)
-controls
-  .append("label")
-  .attr("style", "grid-column: 2;")
-  .html(`<input type="checkbox" id="select-all" checked> Select All`);
+  .html((d) => `<input type="checkbox" value="${d}"> ${d}`);
 
 // Format: [{id: 'f1', values: [{time, temp}, ...]}, ...]
 const mouseLines = mouseIDs.map((id) => ({
@@ -69,32 +63,13 @@ const paths = svg
   .attr("stroke-width", 1.5)
   .attr("d", (d) => line(d.values));
 
+paths.attr("display", "none"); // hide all mouse lines initially
+
 // Checkbox listener
 d3.selectAll("#mouse-controls input[type=checkbox]").on("change", function () {
   const selected = new Set(
     d3
       .selectAll("#mouse-controls input:checked")
-      .nodes()
-      .map((n) => n.value)
-  );
-
-  svg
-    .selectAll("path")
-    .attr("display", (d) => (selected.has(d.id) ? null : "none"));
-});
-
-// Select All behavior
-d3.select("#select-all").on("change", function () {
-  const checked = this.checked;
-
-  d3.selectAll(
-    "#mouse-controls input[type=checkbox]:not(#select-all)"
-  ).property("checked", checked);
-
-  // Re-trigger path visibility update
-  const selected = new Set(
-    d3
-      .selectAll("#mouse-controls input:checked:not(#select-all)")
       .nodes()
       .map((n) => n.value)
   );
@@ -197,34 +172,75 @@ document.getElementById("run-button").addEventListener("click", () => {
   });
 });
 
-mouseLines.forEach((lineData) => {
-  svg.selectAll(`.dot-${lineData.id}`)
-    .data(lineData.values)
-    .join("circle")
-    .attr("class", `dot-${lineData.id}`)
-    .attr("cx", d => xScale(d.time))
-    .attr("cy", d => yScale(d.temperature))
-    .attr("r", 5)
-    .attr("fill", colorScale(lineData.id))
-    .attr("opacity", 0) // invisible but interactive
-    .on("mouseover", function (event, d) {
+mouseLines
+  .filter(line => line.id.startsWith("f")) // only real mice like f1, f2, ...
+  .forEach(lineData => {
+    svg.selectAll(`.dot-${lineData.id}`)
+      .data(lineData.values)
+      .join("circle")
+      .attr("class", `dot-${lineData.id}`)
+      .attr("cx", d => xScale(d.time))
+      .attr("cy", d => yScale(d.temperature))
+      .attr("r", 6)
+      .attr("fill", "transparent")
+      .attr("pointer-events", "all")
+      .on("mouseover", function (event, d) {
+        d3.select("#tooltip")
+          .style("display", "block")
+          .html(`
+            <strong>Mouse:</strong> ${lineData.id}<br/>
+            <strong>Temp:</strong> ${d.temperature.toFixed(1)} °C<br/>
+            <strong>Minute:</strong> ${d.time}
+          `);
+      })
+      .on("mousemove", function (event) {
+        d3.select("#tooltip")
+          .style("left", `${event.pageX + 12}px`)
+          .style("top", `${event.pageY - 28}px`);
+      })
+      .on("mouseout", function () {
+        d3.select("#tooltip").style("display", "none");
+      });
+  });
 
-      console.log(`Hovered: Mouse ${lineData.id}, Temp ${d.temperature}, Minute ${d.time}`);
-
-      d3.select("#tooltip")
-        .style("display", "block")
-        .html(`
-          <strong>Mouse:</strong> ${lineData.id}<br/>
-          <strong>Temp:</strong> ${d.temperature.toFixed(1)} °C<br/>
-          <strong>Minute:</strong> ${d.time}
-        `);
-    })
-    .on("mousemove", function (event) {
-      d3.select("#tooltip")
-        .style("left", event.pageX + 10 + "px")
-        .style("top", event.pageY - 28 + "px");
-    })
-    .on("mouseout", function () {
-      d3.select("#tooltip").style("display", "none");
-    });
+const rangeData = data.map((row, i) => {
+  const temps = Object.values(row).map(Number); // grab all 13 temperatures
+  return {
+    time: i,
+    min: d3.min(temps),
+    max: d3.max(temps)
+  };
 });
+
+const rangeArea = d3.area()
+  .x(d => xScale(d.time))
+  .y0(d => yScale(d.min))
+  .y1(d => yScale(d.max))
+  .curve(d3.curveBasis); // optional smoothing
+
+svg.append("path")
+.datum(rangeData)
+.attr("fill", "#666")
+.attr("opacity", 0.3)
+.attr("d", rangeArea);
+
+const meanData = data.map((row, i) => {
+  const temps = Object.values(row).map(Number);
+  return {
+    time: i,
+    temperature: d3.mean(temps)
+  };
+});
+
+const meanLine = d3.line()
+  .x(d => xScale(d.time))
+  .y(d => yScale(d.temperature))
+  .curve(d3.curveBasis); // optional smoothing
+
+svg.append("path")
+.datum(meanData)
+.attr("fill", "none")
+.attr("stroke", "black")
+.attr("stroke-dasharray", "4 2")
+.attr("stroke-width", 2)
+.attr("d", meanLine);
