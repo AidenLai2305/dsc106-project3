@@ -2,11 +2,11 @@ import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7.9.0/+esm";
 
 const svg = d3.select("svg");
 const width = window.innerWidth * 0.85; 
-const height = 300;
+const height = 500;
 
-const margin = { top: 20, right: 20, bottom: 30, left: 40 };
+const margin = { top: 50, right: 30, bottom: 50, left: 60 };
 
-svg.attr("width", width).attr("height", height);
+svg.attr("width", width).attr("height", height);  
 
 const data = await d3.csv("mouse.csv", d3.autoType);
 const mouseIDs = Object.keys(data[0]);
@@ -125,20 +125,20 @@ svg
   .call(yAxis);
 
 // Add title
-svg
-  .append("text")
-  .attr("x", width / 2)
-  .attr("y", margin.top / 2 + 5)
-  .attr("text-anchor", "middle")
-  .attr("font-size", "18px")
-  .attr("font-weight", "bold")
-  .text("Mouse Temperature Plot (Placeholder)");
+// svg
+//   .append("text")
+//   .attr("x", width / 2)
+//   .attr("y", margin.top / 2 + 5)
+//   .attr("text-anchor", "middle")
+//   .attr("font-size", "18px")
+//   .attr("font-weight", "bold")
+//   .text("Mouse Temperature Plot (Placeholder)");
 
 // X-axis label
 svg
   .append("text")
   .attr("x", width / 2)
-  .attr("y", height - 3)
+  .attr("y", height - margin.bottom + 35)
   .attr("text-anchor", "middle")
   .attr("font-size", "12px")
   .attr("font-weight", "bold")

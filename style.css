@@ -1,18 +1,46 @@
+/* Global layout */
 body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
-  min-height: 100vh;
+  font-family: "Segoe UI", sans-serif;
+  font-size: 14px;
   margin: 0;
+  padding: 0;
 }
 
+/* SVG styling */
+#mouse-plot {
+  width: 85vw;
+  height: 30vw;
+}
+
+/* Controls section wrapper */
+#mouse-controls-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 10px 16px;
+  margin-top: 20px;
+}
+
+/* "Mice" title */
+.mouse-label-title {
+  font-weight: bold;
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
+}
+
+/* Checkboxes container */
 #mouse-controls {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px 16px;
+  gap: 8px 14px;
 }
 
+/* Individual checkbox labels */
 #mouse-controls label {
   display: flex;
   align-items: center;
@@ -22,37 +50,18 @@ body {
   padding: 3px 6px;
   border-radius: 5px;
   transition: background-color 0.2s ease;
+  font-weight: normal;
 }
 
+/* Hover effect */
 #mouse-controls label:hover {
   background-color: #f0f0f0;
 }
 
+/* Checkbox input */
 #mouse-controls input[type="checkbox"] {
-  accent-color: #1e90ff; /* modern checkbox color */
+  accent-color: #1e90ff;
   width: 16px;
   height: 16px;
   cursor: pointer;
-}
-
-#mouse-controls-container {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  gap: 10px 20px;
-  margin-top: 15px;
-  font-family: "Segoe UI", sans-serif;
-  font-size: 14px;
-}
-
-#mouse-title {
-  grid-column: span 2;
-  font-weight: bold;
-  margin-bottom: 5px;
-  text-align: center;
-}
-
-#run-button {
-  margin-top: 20px;
 }
