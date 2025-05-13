@@ -38,10 +38,25 @@
     <div id="tooltip"></div>
 
     <div class="write-up">
+      <br>
       <h2>Write Up</h2>
+      <h4>Rationale behind Design Choices</h4>
       <p>
-        This is a write up for the project. It will contain information about
-        the project, how to run it, and any other relevant information.
+The primary purpose behind our visualization was to examine how the body temperature of female mice changed over the course of their estrous cycle. This led us to decide to use a line graph with area bars to form our interactive visualization, since the line graph gives the users a proper idea about the temporal patterns and trends. The area bar in grey around the line chart was our idea of how to show the variation of all mice without overcrowding the visualization with too many colors and lines. 
+      </p>
+Initially, we considered displaying the temperature distribution of a single mouse during the day as a histogram. While a histogram would have given us a good summary of how common various ranges of temperatures were, it could not have provided information about how the temperatures changed over the course of the day. After trying both approaches, we ultimately decided that a line graph provided a more dynamic view of the data and would allow users to see the overall distribution and quickly identify anomalies or trends, such as the longer spikes in temperature during ovulation days.
+      <p>
+We also utilized D3.js to add our interactive elements, and we chose to implement a tooltip effect over the currently selected mouse that enables the dynamic exploration of that data by the user and returns precise values. The color scheme was selected so that the selected mouse can be plotted over the black static mean line without confusing the viewer.
+      </p>
+
+      <h4>Overview of Development Process</h4>
+
+      <p>
+Our development cycle started with a one-hour discussion brainstorming possible visualization techniques and drawing out some rough sketches. The bulk of the coding took around five hours, and this is where we invested in setting up the data pipeline, building the line chart using D3 and adding our interactivity with tooltips and mouse-over effects. An additional two hours were invested in CSS styling the visualization so that the graph was not only pleasing to the eyes but also easy to use.
+      </p>
+Overall, writing the visualization and combining D3's interactive features was the most time-consuming, as it needed to be debugged and tuned in order for the resulting behavior and looks to match. An issue that we had to deal with was the lag that our original tooltip caused on our website. Before deciding on only showing one mouse at a time we had the option to show multiple mice at once. The way we had coded our tooltip as a function made it very laggy, since the amount of points displayed caused our function to be called too many times which slowed down our website. We decided to fix this by limiting the graph to only one mouse at a time, which fixed our lag issue and limited distractions to the viewer. Scaling the axes to work on different sized browsers and making sure that data was well formatted and was easy for the user to navigate was a big part of our CSS code.
+      <p>
+Together, we took around 8 people-hours on the project. We divided the work by delegating tasks equally: one for data exploration and data handling, two of us worked on D3 and interactivity, and another person worked on streamlining the visual design and CSS styling. 
       </p>
     </div>
   </body>
