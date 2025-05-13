@@ -43,9 +43,9 @@ const line = d3.line()
   .y(d => yScale(d.temperature));
 
 const customColors = [
-  "#e6194b", "#f58231", "#ffe119", "#bfef45", "#3cb44b",
+  "#e6194b", "#f58231", "#e6ab02", "#3cb44b","#469990", 
   "#42d4f4", "#4363d8", "#911eb4", "#f032e6", "#800000",
-  "#9A6324", "#808000", "#000075"
+  "#9A6324", "#808000", "#000075", 
 ];
 
 const colorScale = d3.scaleOrdinal()
