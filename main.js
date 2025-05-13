@@ -10,13 +10,15 @@ svg.attr("width", width).attr("height", height);
 const data = await d3.csv("mouse.csv", d3.autoType);
 const mouseIDs = Object.keys(data[0]);
 
-// Create checkboxes (unchecked by default)
+// Create selection
 const controls = d3.select("#mouse-controls");
 controls.selectAll("label")
   .data(mouseIDs)
   .join("label")
   .attr("style", "margin-right: 10px;")
-  .html(d => `<input type="checkbox" value="${d}"> ${d}`);
+  .html(d => `
+    <input type="radio" name="mouse" value="${d}" ${d === "f1" ? "checked" : ""}> ${d}
+  `);
 
 // Organize mouse lines
 const mouseLines = mouseIDs.map(id => ({
@@ -40,9 +42,15 @@ const line = d3.line()
   .x(d => xScale(d.time))
   .y(d => yScale(d.temperature));
 
+const customColors = [
+  "#e6194b", "#f58231", "#ffe119", "#bfef45", "#3cb44b",
+  "#42d4f4", "#4363d8", "#911eb4", "#f032e6", "#800000",
+  "#9A6324", "#808000", "#000075"
+];
+
 const colorScale = d3.scaleOrdinal()
   .domain(mouseIDs)
-  .range(d3.schemeCategory10);
+  .range(customColors);
 
 // Grey shaded range
 const rangeData = data.map((row, i) => {
@@ -188,8 +196,8 @@ function renderTooltips() {
     });
 }
 
-// Checkbox interaction
-d3.selectAll("#mouse-controls input[type=checkbox]").on("change", function () {
+// selection interaction
+d3.selectAll("#mouse-controls input[type=radio]").on("change", function () {
   const selected = new Set(
     d3.selectAll("#mouse-controls input:checked").nodes().map(n => n.value)
   );
@@ -200,10 +208,13 @@ d3.selectAll("#mouse-controls input[type=checkbox]").on("change", function () {
   renderTooltips();
 });
 
+// Manually trigger the change event for f1
+d3.select(`#mouse-controls input[value="f1"]`).dispatch("change");
+
 // Run animation button
 document.getElementById("run-button").addEventListener("click", () => {
   const checked = Array.from(
-    document.querySelectorAll('#mouse-controls input[type="checkbox"]:checked')
+    document.querySelectorAll('#mouse-controls input[type="radio"]:checked')
   );
 
   if (checked.length !== 1) {
