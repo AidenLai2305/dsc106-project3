@@ -4,7 +4,7 @@ const svg = d3.select("svg");
 const width = window.innerWidth * 0.85;
 const height = window.innerWidth * 0.3;
 
-const margin = { top: 50, right: 30, bottom: 50, left: 60 };
+const margin = { top: 50, right: 30, bottom: 70, left: 60 };
 svg.attr("width", width).attr("height", height);
 
 const data = await d3.csv("mouse.csv", d3.autoType);
@@ -160,6 +160,23 @@ svg
   .attr("font-size", "12px")
   .attr("font-weight", "bold")
   .text("Time (Days)");
+
+svg
+  .append("text")
+  .attr("x", width / 2)
+  .attr("y", height - margin.bottom + 50)
+  .attr("text-anchor", "middle")
+  .attr("font-size", "12px")
+  .attr("fill", "red")
+  .text("* Red Days Indicate the Start of the Ovulation Cycle");
+
+svg
+  .append("text")
+  .attr("x", width - 170)
+  .attr("y", 30)
+  .attr("text-anchor", "middle")
+  // .attr("font-size", "12px")
+  .text("* Black Line Represents the Mean of All Mice");
 
 svg
   .append("text")

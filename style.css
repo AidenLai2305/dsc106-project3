@@ -43,10 +43,11 @@ p {
 #mouse-controls-container {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
+  /* align-items: center; */
+  /* justify-content: center; */
   gap: 10px 16px;
   margin-top: 20px;
+  margin-bottom: 2rem;
 }
 
 /* "Mice" title */
@@ -54,7 +55,7 @@ p {
   font-weight: bold;
   margin-right: 10px;
   display: flex;
-  align-items: center;
+  /* align-items: center; */
 }
 
 /* Checkboxes container */
@@ -84,7 +85,7 @@ p {
 }
 
 /* Checkbox input */
-#mouse-controls input[type="checkbox"] {
+#mouse-controls input[type="radio"] {
   accent-color: #1e90ff;
   width: 16px;
   height: 16px;
