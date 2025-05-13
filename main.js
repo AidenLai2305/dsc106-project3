@@ -19,9 +19,8 @@ controls
   .attr("style", "margin-right: 10px;")
   .html(
     (d) => `
-    <input type="radio" name="mouse" value="${d}" ${
-      d === "f1" ? "checked" : ""
-    }> ${d}
+    <input type="radio" name="mouse" value="${d}" ${d === "f1" ? "checked" : ""
+      }> ${d}
   `
   );
 

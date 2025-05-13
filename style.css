@@ -30,8 +30,9 @@ p {
 .chart-wrapper {
   display: flex;
   flex-direction: column;
-  align-items: center; /* this aligns the chart stuff */
-} 
+  align-items: center;
+  /* this aligns the chart stuff */
+}
 
 /* SVG styling */
 #mouse-plot {
