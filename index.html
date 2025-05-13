@@ -9,16 +9,16 @@
   </head>
   <body>
     <h1>
-      How does body temperature fluctuate across the estrous cycle in female
-      mice over a 14-day period?
+      How Does Body Temperature Fluctuate Across The Estrous Cycle in Female
+      Mice Over a 14-Day Period?
     </h1>
 
-    <h2>By: Team Pandamonium</h2>
+    <h2>Team Pandamonium</h2>
 
     <p id="graph-description">
       Not every mouse is the same when undergoing the estrous cycle. While some
-      mice hit extreme highs in body temperature, others stay cool and appear
-      more inactive. If a mouse exhibits high body temperatures under its
+      mice hit extreme highs in body temperature (like mouse f5), others stay cool and appear
+      more inactive (like mouse f13). If a mouse exhibits high body temperatures under its
       estrous cycle, could it imply that there is something different in this
       mouse's biology to explain? Let's explore how the different mice in our
       study deivate from the mean temperatures at each minute of the 14-day
@@ -42,21 +42,40 @@
       <h2>Write Up</h2>
       <h4>Rationale behind Design Choices</h4>
       <p>
-The primary purpose behind our visualization was to examine how the body temperature of female mice changed over the course of their estrous cycle. This led us to decide to use a line graph with area bars to form our interactive visualization, since the line graph gives the users a proper idea about the temporal patterns and trends. The area bar in grey around the line chart was our idea of how to show the variation of all mice without overcrowding the visualization with too many colors and lines. 
+        The primary purpose behind our visualization was to examine how the body temperature of female mice changed over the course of their estrous cycle. This led to the decision of
+       using a line graph with area bars to form our interactive visualization, since the line graph gives the users a proper idea about the temporal patterns and trends. The area bar in 
+       grey around the line chart was our idea of how to show the variation of all mice without overcrowding the visualization with too many colors and lines, which was previously a problem 
+       we had in our checkpoint. Before, our plot was too visually confusing and it was difficult to see any important takeaways.
       </p>
-Initially, we considered displaying the temperature distribution of a single mouse during the day as a histogram. While a histogram would have given us a good summary of how common various ranges of temperatures were, it could not have provided information about how the temperatures changed over the course of the day. After trying both approaches, we ultimately decided that a line graph provided a more dynamic view of the data and would allow users to see the overall distribution and quickly identify anomalies or trends, such as the longer spikes in temperature during ovulation days.
+        Initially, we considered displaying the temperature distribution of a single mouse during the day as a histogram. While a histogram would have given us a good summary of how common various 
+      ranges of temperatures were, it could not have provided information about how the temperatures changed over the course of the day. After trying both approaches, we ultimately decided that a
+       line graph provided a more dynamic view of the data and would allow users to see the overall distribution and quickly identify anomalies or trends, such as the longer spikes in temperature during 
+       ovulation days.
       <p>
-We also utilized D3.js to add our interactive elements, and we chose to implement a tooltip effect over the currently selected mouse that enables the dynamic exploration of that data by the user and returns precise values. The color scheme was selected so that the selected mouse can be plotted over the black static mean line without confusing the viewer.
+        We utilized D3.js to add our interactive elements, and we chose to implement a tooltip effect over the currently selected mouse that enables the dynamic exploration of that data by the user
+         and returns precise values. The color scheme was selected so that the selected mouse can be plotted over the black static mean line without confusing the viewer, giving each mouse a distinct color,
+          but making sure that the color was still easily visible with the opacity we gave it. 
       </p>
 
       <h4>Overview of Development Process</h4>
 
       <p>
-Our development cycle started with a one-hour discussion brainstorming possible visualization techniques and drawing out some rough sketches. The bulk of the coding took around five hours, and this is where we invested in setting up the data pipeline, building the line chart using D3 and adding our interactivity with tooltips and mouse-over effects. An additional two hours were invested in CSS styling the visualization so that the graph was not only pleasing to the eyes but also easy to use.
+        Our development cycle started with a one-hour discussion brainstorming possible visualization techniques and drawing out some rough sketches. The bulk of the coding took around five hours, and this is where 
+        we invested in setting up the data pipeline, building the line chart using D3 and adding our interactivity with tooltips, mouse-over effects, and a selection mechanism. An additional two hours were 
+        invested in CSS styling the visualization so that the graph was not only pleasing to the eyes but also easy to use. One issue we ran into was the scaling of the graph made the lines difficult to make out, 
+        and the variable size on different peoples laptops. To combat this, we made the size of the svg reactive to the users ui and window size, so that the scaling was at the biggest possible for everyone while 
+        maintaining proper scaling.
       </p>
-Overall, writing the visualization and combining D3's interactive features was the most time-consuming, as it needed to be debugged and tuned in order for the resulting behavior and looks to match. An issue that we had to deal with was the lag that our original tooltip caused on our website. Before deciding on only showing one mouse at a time we had the option to show multiple mice at once. The way we had coded our tooltip as a function made it very laggy, since the amount of points displayed caused our function to be called too many times which slowed down our website. We decided to fix this by limiting the graph to only one mouse at a time, which fixed our lag issue and limited distractions to the viewer. Scaling the axes to work on different sized browsers and making sure that data was well formatted and was easy for the user to navigate was a big part of our CSS code.
+        Overall, writing the visualization and combining D3's interactive features was the most time-consuming, as it needed to be debugged and tuned in order for the resulting behavior and looks to match. An issue that 
+        we had to deal with was the lag that our original tooltip caused on our website. Before deciding on only showing one mouse at a time we had the option to show multiple mice at once. The way we had coded our 
+        tooltip as a function made it very laggy, since the amount of points displayed caused our function to be called too many times which slowed down our website. It often took 1-2 seconds to even load the website 
+        and we fixed this by making the tooltip a function, rather than constantly running all of the time. However, we noticed that loading multiple mice was still laggy and the tooltip was having a hard time because
+         there were multiple lines layered on top of each other. We decided to fix this by limiting the graph to only one mouse at a time, which fixed our lag issue and limited distractions to the viewer. Additionally, 
+         we had to rearrange our mean and area bar code within the file as it was layered on top of the mice, meaning the tooltip was working on the area bar rather than the mice themselves. Scaling the axes to work 
+         on different sized browsers and making sure that data was well formatted and was easy for the user to navigate was a big part of our CSS code.
       <p>
-Together, we took around 8 people-hours on the project. We divided the work by delegating tasks equally: one for data exploration and data handling, two of us worked on D3 and interactivity, and another person worked on streamlining the visual design and CSS styling. 
+        Together, we took around 8 people-hours on the project. We divided the work by delegating tasks equally: one for data exploration and data handling, two of us worked on D3 and interactivity, and another person worked on 
+        streamlining the visual design and CSS styling. 
       </p>
     </div>
   </body>
