@@ -172,17 +172,17 @@ svg
 
 svg
   .append("text")
-  .attr("x", width - 170)
+  .attr("x", width - 230)
   .attr("y", 30)
   .attr("text-anchor", "middle")
   // .attr("font-size", "12px")
-  .text("* Black Line Represents the Mean of All Mice");
+  .text("* Black Line Represents the Mean Body Temp of All Mice");
 
 svg
   .append("text")
   .attr("transform", "rotate(-90)")
   .attr("x", -height / 2)
-  .attr("y", 8)
+  .attr("y", 24)
   .attr("text-anchor", "middle")
   .attr("font-size", "12px")
   .attr("font-weight", "bold")
